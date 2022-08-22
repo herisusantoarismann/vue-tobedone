@@ -11,10 +11,19 @@
           class="bg-secondary w-24 xl:w-28 xl:text-lg outline-none border-none"
           type="text"
           :value="name"
+          :readonly="!isEdit"
         />
         <font-awesome-icon
+          v-if="isEdit"
+          icon="fa-solid fa-floppy-disk"
+          class="text-sm cursor-pointer transition duration-150 hover:text-black"
+          @click="saveName"
+        />
+        <font-awesome-icon
+          v-else
           icon="fa-solid fa-pencil"
           class="text-gray-400 text-xs cursor-pointer transition duration-150 hover:text-black"
+          @click="toggleEdit"
         />
       </div>
       <ButtonAdd />
@@ -40,7 +49,17 @@ export default {
   data() {
     return {
       name: "New Activity",
+      isEdit: false,
     };
+  },
+  methods: {
+    toggleEdit() {
+      this.isEdit = !this.isEdit;
+    },
+    saveName() {
+      alert("saved");
+      this.isEdit = false;
+    },
   },
 };
 </script>
