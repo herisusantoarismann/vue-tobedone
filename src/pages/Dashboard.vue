@@ -18,7 +18,7 @@
       <div
         v-for="(data, index) in datas"
         :key="index"
-        class="p-4 max-w-[14rem] bg-white flex justify-between flex-col gap-24 rounded-md shadow-md transition duration-150 cursor-pointer hover:shadow-lg"
+        class="p-4 max-w-[14rem] lg:max-w-[13rem] bg-white flex justify-between flex-col gap-24 rounded-md shadow-md transition duration-150 cursor-pointer hover:shadow-lg"
       >
         <p class="font-bold text-xl">{{ data.name }}</p>
         <div class="flex items-center justify-between">
