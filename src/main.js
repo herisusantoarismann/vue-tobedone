@@ -9,8 +9,9 @@ import {
   faPencil,
   faFloppyDisk,
   faTrashCan,
+  faSort,
 } from "@fortawesome/free-solid-svg-icons";
-library.add([faPlus, faAngleLeft, faPencil, faFloppyDisk, faTrashCan]);
+library.add([faPlus, faAngleLeft, faPencil, faFloppyDisk, faTrashCan, faSort]);
 import { router } from "./router/";
 
 createApp(App)

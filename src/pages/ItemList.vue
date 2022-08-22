@@ -26,7 +26,13 @@
           @click="toggleEdit"
         />
       </div>
-      <ButtonAdd />
+      <div class="flex items-center gap-4">
+        <font-awesome-icon
+          icon="fa-solid fa-sort"
+          class="text-gray-400 cursor-pointer transition duration-150 hover:text-black"
+        />
+        <ButtonAdd />
+      </div>
     </div>
     <img
       v-if="datas.length === 0"
@@ -57,10 +63,16 @@
           <div v-else class="w-2 h-2 bg-gray-600 rounded-full"></div>
           <p>{{ data.name }}</p>
         </div>
-        <font-awesome-icon
-          icon="fa-solid fa-trash-can"
-          class="text-gray-400 cursor-pointer hover:text-red-600"
-        />
+        <div class="flex gap-4">
+          <font-awesome-icon
+            icon="fa-solid fa-pencil"
+            class="text-gray-400 cursor-pointer hover:text-blue-600"
+          />
+          <font-awesome-icon
+            icon="fa-solid fa-trash-can"
+            class="text-gray-400 cursor-pointer hover:text-red-600"
+          />
+        </div>
       </div>
     </div>
   </div>
