@@ -34,7 +34,7 @@
       alt="empty-state-img"
       class="mt-12 md:w-2/4 md:mx-auto xl:w-1/4"
     />
-    <div class="p-4 flex flex-col gap-4">
+    <div class="p-4 md:px-24 lg:px-40 xl:px-96 flex flex-col gap-4">
       <div
         v-for="(data, index) in datas"
         :key="index"
@@ -57,7 +57,10 @@
           <div v-else class="w-2 h-2 bg-gray-600 rounded-full"></div>
           <p>{{ data.name }}</p>
         </div>
-        <font-awesome-icon icon="fa-solid fa-trash-can" class="text-gray-400" />
+        <font-awesome-icon
+          icon="fa-solid fa-trash-can"
+          class="text-gray-400 cursor-pointer hover:text-red-600"
+        />
       </div>
     </div>
   </div>
