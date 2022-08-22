@@ -29,10 +29,37 @@
       <ButtonAdd />
     </div>
     <img
+      v-if="datas.length === 0"
       :src="require('../assets/todo-empty-state.png')"
       alt="empty-state-img"
       class="mt-12 md:w-2/4 md:mx-auto xl:w-1/4"
     />
+    <div class="p-4 flex flex-col gap-4">
+      <div
+        v-for="(data, index) in datas"
+        :key="index"
+        class="bg-white py-3 px-4 rounded shadow flex items-center justify-between"
+      >
+        <div class="flex items-center gap-2">
+          <input type="checkbox" />
+          <div
+            v-if="data.priority === 'High'"
+            class="w-2 h-2 bg-red-600 rounded-full"
+          ></div>
+          <div
+            v-else-if="data.priority === 'Medium'"
+            class="w-2 h-2 bg-yellow-600 rounded-full"
+          ></div>
+          <div
+            v-else-if="data.priority === 'Low'"
+            class="w-2 h-2 bg-green-600 rounded-full"
+          ></div>
+          <div v-else class="w-2 h-2 bg-gray-600 rounded-full"></div>
+          <p>{{ data.name }}</p>
+        </div>
+        <font-awesome-icon icon="fa-solid fa-trash-can" class="text-gray-400" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -50,6 +77,20 @@ export default {
     return {
       name: "New Activity",
       isEdit: false,
+      datas: [
+        {
+          name: "Telur Ayam",
+          priority: "High",
+        },
+        {
+          name: "Beras 5 kg",
+          priority: "Medium",
+        },
+        {
+          name: "Daging",
+          priority: "Low",
+        },
+      ],
     };
   },
   methods: {
