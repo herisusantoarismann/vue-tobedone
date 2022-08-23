@@ -46,33 +46,7 @@
         :key="index"
         class="bg-white py-3 px-4 rounded shadow flex items-center justify-between"
       >
-        <div class="flex items-center gap-2">
-          <input type="checkbox" />
-          <div
-            v-if="data.priority === 'High'"
-            class="w-2 h-2 bg-red-600 rounded-full"
-          ></div>
-          <div
-            v-else-if="data.priority === 'Medium'"
-            class="w-2 h-2 bg-yellow-600 rounded-full"
-          ></div>
-          <div
-            v-else-if="data.priority === 'Low'"
-            class="w-2 h-2 bg-green-600 rounded-full"
-          ></div>
-          <div v-else class="w-2 h-2 bg-gray-600 rounded-full"></div>
-          <p>{{ data.name }}</p>
-        </div>
-        <div class="flex gap-4">
-          <font-awesome-icon
-            icon="fa-solid fa-pencil"
-            class="text-gray-400 cursor-pointer hover:text-blue-600"
-          />
-          <font-awesome-icon
-            icon="fa-solid fa-trash-can"
-            class="text-gray-400 cursor-pointer hover:text-red-600"
-          />
-        </div>
+        <ActivityItem :priority="data.priority" :name="data.name" />
       </div>
     </div>
   </div>
@@ -81,12 +55,14 @@
 <script>
 import Header from "../components/Header.vue";
 import ButtonAdd from "../components/ButtonAdd.vue";
+import ActivityItem from "../components/ActivityItem.vue";
 
 export default {
   name: "ItemListPage",
   components: {
     Header,
     ButtonAdd,
+    ActivityItem,
   },
   data() {
     return {
