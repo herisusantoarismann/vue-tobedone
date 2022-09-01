@@ -10,7 +10,7 @@
         <input
           class="bg-secondary w-24 xl:w-28 xl:text-lg outline-none border-none"
           type="text"
-          :value="name"
+          :value="data.name"
           :readonly="!isEdit"
         />
         <font-awesome-icon
@@ -31,12 +31,12 @@
       </div>
     </div>
     <img
-      v-if="datas.length === 0"
+      v-if="data.activity.length === 0"
       :src="require('../assets/todo-empty-state.png')"
       alt="empty-state-img"
       class="mt-12 md:w-2/4 md:mx-auto xl:w-1/4"
     />
-    <div class="p-4 md:px-24 lg:px-40 xl:px-96 flex flex-col gap-4">
+    <div v-else class="p-4 md:px-24 lg:px-40 xl:px-96 flex flex-col gap-4">
       <div
         v-for="(data, index) in datas"
         :key="index"
@@ -64,24 +64,12 @@ export default {
     Modal,
   },
   data() {
+    const datas = JSON.parse(localStorage.getItem("vue-tobedone"));
+    const data = datas.filter((data) => data.id == this.$route.params.id);
     return {
-      name: "New Activity",
       isEdit: false,
       isModalShow: false,
-      datas: [
-        {
-          name: "Telur Ayam",
-          priority: "High",
-        },
-        {
-          name: "Beras 5 kg",
-          priority: "Medium",
-        },
-        {
-          name: "Daging",
-          priority: "Low",
-        },
-      ],
+      data: data[0],
     };
   },
   methods: {

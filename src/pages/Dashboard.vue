@@ -81,8 +81,7 @@ export default {
     },
     toDetailActivity(e, id) {
       e.stopPropagation();
-      alert(id);
-      // this.$router.push(`/item-list/${id}`);
+      this.$router.push(`/item-list/${id}`);
     },
   },
 };
