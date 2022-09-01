@@ -1,10 +1,11 @@
 <template>
-  <p class="font-bold text-xl">{{ name }}</p>
+  <p class="font-bold text-xl">{{ data.name }}</p>
   <div class="flex items-center justify-between">
-    <p class="text-sm text-gray-400">{{ date }}</p>
+    <p class="text-sm text-gray-400">{{ data.date }}</p>
     <font-awesome-icon
       icon="fa-solid fa-trash-can"
       class="text-sm text-gray-400 cursor-pointer transition duration-150 hover:text-red-600"
+      @click="deleteActivity"
     />
   </div>
 </template>
@@ -13,8 +14,16 @@
 export default {
   name: "ActivityComponents",
   props: {
-    name: String,
-    date: String,
+    data: Object,
+    getData: Function,
+  },
+  methods: {
+    deleteActivity() {
+      let datas = JSON.parse(localStorage.getItem("vue-tobedone"));
+      datas = datas.filter((data) => data.id !== this.data.id);
+      localStorage.setItem("vue-tobedone", JSON.stringify(datas));
+      this.getData();
+    },
   },
 };
 </script>

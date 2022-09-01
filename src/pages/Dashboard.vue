@@ -22,7 +22,7 @@
         :key="index"
         class="p-4 w-48 max-w-[14rem] lg:max-w-[13rem] bg-white flex justify-between flex-col gap-24 rounded-md shadow-md transition duration-150 cursor-pointer hover:shadow-lg"
       >
-        <Activity :name="data.name" :date="data.date" />
+        <Activity :data="data" :getData="getData" />
       </div>
     </div>
   </div>
@@ -53,17 +53,26 @@ export default {
       this.datas = datas;
     },
     addNewActivity() {
-      const newData = {
-        id: 1,
-        name: "New Activity",
-        activity: [],
-        date: moment().format("ll"),
-      };
       if (this.datas === null) {
-        const datas = [newData];
+        const datas = [
+          {
+            id: 1,
+            name: "New Activity",
+            activity: [],
+            date: moment().format("ll"),
+          },
+        ];
         localStorage.setItem("vue-tobedone", JSON.stringify(datas));
       } else {
-        const datas = [...this.datas, newData];
+        const datas = [
+          ...this.datas,
+          {
+            id: this.datas.length + 1,
+            name: "New Activity",
+            activity: [],
+            date: moment().format("ll"),
+          },
+        ];
         localStorage.setItem("vue-tobedone", JSON.stringify(datas));
       }
 
