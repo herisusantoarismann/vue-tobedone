@@ -5,7 +5,7 @@
     <font-awesome-icon
       icon="fa-solid fa-trash-can"
       class="text-sm text-gray-400 cursor-pointer transition duration-150 hover:text-red-600"
-      @click="deleteActivity"
+      @click="(e) => deleteActivity(e)"
     />
   </div>
 </template>
@@ -18,7 +18,8 @@ export default {
     getData: Function,
   },
   methods: {
-    deleteActivity() {
+    deleteActivity(e) {
+      e.stopPropagation();
       let datas = JSON.parse(localStorage.getItem("vue-tobedone"));
       datas = datas.filter((data) => data.id !== this.data.id);
       localStorage.setItem("vue-tobedone", JSON.stringify(datas));

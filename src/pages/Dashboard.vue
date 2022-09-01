@@ -8,7 +8,7 @@
       </div>
     </div>
     <img
-      v-if="datas === null"
+      v-if="datas === null || datas.length === 0"
       :src="require('../assets/activity-empty-state.png')"
       alt="empty-state-img"
       class="mt-12 md:w-2/4 md:mx-auto xl:w-1/4"
@@ -21,6 +21,7 @@
         v-for="(data, index) in datas"
         :key="index"
         class="p-4 w-48 max-w-[14rem] lg:max-w-[13rem] bg-white flex justify-between flex-col gap-24 rounded-md shadow-md transition duration-150 cursor-pointer hover:shadow-lg"
+        @click="(e) => toDetailActivity(e, data.id)"
       >
         <Activity :data="data" :getData="getData" />
       </div>
@@ -77,6 +78,11 @@ export default {
       }
 
       this.getData();
+    },
+    toDetailActivity(e, id) {
+      e.stopPropagation();
+      alert(id);
+      // this.$router.push(`/item-list/${id}`);
     },
   },
 };
