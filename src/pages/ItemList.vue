@@ -38,15 +38,15 @@
     />
     <div v-else class="p-4 md:px-24 lg:px-40 xl:px-96 flex flex-col gap-4">
       <div
-        v-for="(data, index) in datas"
+        v-for="(act, index) in data.activity"
         :key="index"
         class="bg-white py-3 px-4 rounded shadow flex items-center justify-between"
       >
-        <ActivityItem :priority="data.priority" :name="data.name" />
+        <ActivityItem :priority="act.priority" :name="act.name" />
       </div>
     </div>
   </div>
-  <Modal v-model="isModalShow" />
+  <Modal v-model="isModalShow" :refreshData="refreshData" />
   <Snackbar :message="message" v-model="isSnackbarShow" />
 </template>
 
@@ -83,6 +83,11 @@ export default {
     },
     openModal() {
       this.isModalShow = true;
+    },
+    refreshData() {
+      const datas = JSON.parse(localStorage.getItem("vue-tobedone"));
+      const data = datas.filter((data) => data.id == this.$route.params.id);
+      this.data = data[0];
     },
     saveName() {
       let datas = JSON.parse(localStorage.getItem("vue-tobedone"));

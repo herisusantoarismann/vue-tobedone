@@ -55,6 +55,9 @@ export default {
     modelValue: {
       type: Boolean,
     },
+    refreshData: {
+      type: Function,
+    },
   },
   data() {
     return {
@@ -64,7 +67,17 @@ export default {
   },
   methods: {
     submit() {
-      console.log(this.name, this.priority);
+      let datas = JSON.parse(localStorage.getItem("vue-tobedone"));
+      datas.map((data) => {
+        if (data.id == this.$route.params.id)
+          data.activity = [
+            ...data.activity,
+            { name: this.name, priority: this.priority },
+          ];
+      });
+      localStorage.setItem("vue-tobedone", JSON.stringify(datas));
+      this.$emit("update:modelValue", false);
+      this.refreshData();
     },
     closeModal() {
       (this.name = ""), (this.priority = "High");
