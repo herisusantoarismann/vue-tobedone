@@ -42,11 +42,24 @@
         :key="index"
         class="bg-white py-3 px-4 rounded shadow flex items-center justify-between"
       >
-        <ActivityItem :priority="act.priority" :name="act.name" />
+        <ActivityItem
+          :priority="act.priority"
+          :name="act.name"
+          :id="act.id"
+          v-model="isModalShow"
+          :onEdit="onEdit"
+        />
       </div>
     </div>
   </div>
-  <Modal v-model="isModalShow" :refreshData="refreshData" />
+  <Modal
+    v-model:isModalShow="isModalShow"
+    v-model:isEdit="isActivityEdit"
+    :refreshData="refreshData"
+    v-model:id="activity.id"
+    v-model:name="activity.name"
+    v-model:priority="activity.priority"
+  />
   <Snackbar :message="message" v-model="isSnackbarShow" />
 </template>
 
@@ -56,6 +69,7 @@ import ButtonAdd from "../components/ButtonAdd.vue";
 import ActivityItem from "../components/ActivityItem.vue";
 import Modal from "../components/Modal.vue";
 import Snackbar from "../components/Snackbar.vue";
+import { reactive } from "vue";
 
 export default {
   name: "ItemListPage",
@@ -66,6 +80,17 @@ export default {
     Modal,
     Snackbar,
   },
+  setup() {
+    const activity = reactive({
+      id: 0,
+      name: "",
+      priority: "High",
+    });
+
+    return {
+      activity,
+    };
+  },
   data() {
     const datas = JSON.parse(localStorage.getItem("vue-tobedone"));
     const data = datas.filter((data) => data.id == this.$route.params.id);
@@ -73,6 +98,7 @@ export default {
       isEdit: false,
       isModalShow: false,
       isSnackbarShow: false,
+      isActivityEdit: false,
       message: "",
       data: data[0],
     };
@@ -101,6 +127,13 @@ export default {
       setTimeout(() => {
         this.isSnackbarShow = false;
       }, 3000);
+    },
+    onEdit(id, name, priority) {
+      this.activity.id = id;
+      this.activity.name = name;
+      this.activity.priority = priority;
+      this.isActivityEdit = true;
+      this.isModalShow = true;
     },
   },
 };

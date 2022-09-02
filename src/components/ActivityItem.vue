@@ -20,6 +20,7 @@
     <font-awesome-icon
       icon="fa-solid fa-pencil"
       class="text-gray-400 cursor-pointer hover:text-blue-600"
+      @click="onEdit(id, name, priority)"
     />
     <font-awesome-icon
       icon="fa-solid fa-trash-can"
@@ -32,8 +33,11 @@
 export default {
   name: "ActivityItem",
   props: {
+    id: Number,
     priority: String,
     name: String,
+    modelValue: Boolean,
+    onEdit: Function,
   },
 };
 </script>
