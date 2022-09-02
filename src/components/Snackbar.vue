@@ -1,7 +1,7 @@
 <template>
   <div
     class="w-3/4 fixed bottom-2 left-2/4 -translate-x-2/4 px-4 py-2 flex justify-between items-center bg-black text-white rounded shadow"
-    :class="isShow ? 'block' : 'hidden'"
+    :class="modelValue ? 'block' : 'hidden'"
   >
     <p class="text-sm">{{ message }}</p>
     <p
@@ -17,18 +17,16 @@
 export default {
   name: "SnackbarComponent",
   props: {
+    modelValue: {
+      type: Boolean,
+    },
     message: {
       type: String,
     },
   },
-  data() {
-    return {
-      isShow: false,
-    };
-  },
   methods: {
     closeSnackbar() {
-      this.isShow = false;
+      this.$emit("update:modelValue", false);
     },
   },
 };

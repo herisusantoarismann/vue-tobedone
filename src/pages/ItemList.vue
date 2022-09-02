@@ -47,7 +47,7 @@
     </div>
   </div>
   <Modal v-model="isModalShow" />
-  <Snackbar />
+  <Snackbar :message="message" v-model="isSnackbarShow" />
 </template>
 
 <script>
@@ -72,6 +72,8 @@ export default {
     return {
       isEdit: false,
       isModalShow: false,
+      isSnackbarShow: false,
+      message: "",
       data: data[0],
     };
   },
@@ -83,12 +85,17 @@ export default {
       this.isModalShow = true;
     },
     saveName() {
-      console.log(this.data.name);
-      // let datas = JSON.parse(localStorage.getItem("vue-tobedone"));
-      // datas.map((data) => {
-      //   if(data.id == this.$route.params.id)
-      // })
+      let datas = JSON.parse(localStorage.getItem("vue-tobedone"));
+      datas.map((data) => {
+        if (data.id == this.$route.params.id) data.name = this.data.name;
+      });
+      localStorage.setItem("vue-tobedone", JSON.stringify(datas));
+      this.message = "Berhasil ganti nama.";
+      this.isSnackbarShow = true;
       this.isEdit = false;
+      setTimeout(() => {
+        this.isSnackbarShow = false;
+      }, 3000);
     },
   },
 };
