@@ -10,7 +10,7 @@
         <input
           class="bg-secondary w-24 xl:w-28 xl:text-lg outline-none border-none"
           type="text"
-          :value="data.name"
+          v-model="data.name"
           :readonly="!isEdit"
         />
         <font-awesome-icon
@@ -47,6 +47,7 @@
     </div>
   </div>
   <Modal v-model="isModalShow" />
+  <Snackbar />
 </template>
 
 <script>
@@ -54,6 +55,7 @@ import Header from "../components/Header.vue";
 import ButtonAdd from "../components/ButtonAdd.vue";
 import ActivityItem from "../components/ActivityItem.vue";
 import Modal from "../components/Modal.vue";
+import Snackbar from "../components/Snackbar.vue";
 
 export default {
   name: "ItemListPage",
@@ -62,6 +64,7 @@ export default {
     ButtonAdd,
     ActivityItem,
     Modal,
+    Snackbar,
   },
   data() {
     const datas = JSON.parse(localStorage.getItem("vue-tobedone"));
@@ -80,7 +83,11 @@ export default {
       this.isModalShow = true;
     },
     saveName() {
-      alert("saved");
+      console.log(this.data.name);
+      // let datas = JSON.parse(localStorage.getItem("vue-tobedone"));
+      // datas.map((data) => {
+      //   if(data.id == this.$route.params.id)
+      // })
       this.isEdit = false;
     },
   },
