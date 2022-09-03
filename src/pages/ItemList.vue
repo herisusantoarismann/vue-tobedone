@@ -92,6 +92,14 @@ export default {
       activity,
     };
   },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(to) {
+        document.title = to.meta.title || "Vue-Tobedone - Activity";
+      },
+    },
+  },
   data() {
     const datas = JSON.parse(localStorage.getItem("vue-tobedone"));
     const data = datas.filter((data) => data.id == this.$route.params.id);

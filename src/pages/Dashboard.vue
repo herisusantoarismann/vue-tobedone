@@ -42,6 +42,14 @@ export default {
     ButtonAdd,
     Activity,
   },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(to) {
+        document.title = to.meta.title || "Vue-Tobedone - Home";
+      },
+    },
+  },
   data() {
     const datas = JSON.parse(localStorage.getItem("vue-tobedone"));
     return {
