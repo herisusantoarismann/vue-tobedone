@@ -32,7 +32,7 @@
 
 ## About The Project
 
-![Tobedone App](https://github.com/herisusantoarismann/quran-app/blob/master/Screenshot.png)
+![Tobedone App](https://github.com/herisusantoarismann/vue-tobedone/blob/master/Screenshoot.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
