@@ -25,6 +25,7 @@
     <font-awesome-icon
       icon="fa-solid fa-trash-can"
       class="text-gray-400 cursor-pointer hover:text-red-600"
+      @click="onDelete(id)"
     />
   </div>
 </template>
@@ -38,6 +39,7 @@ export default {
     name: String,
     modelValue: Boolean,
     onEdit: Function,
+    onDelete: Function,
   },
 };
 </script>

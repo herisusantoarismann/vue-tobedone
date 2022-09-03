@@ -48,6 +48,7 @@
           :id="act.id"
           v-model="isModalShow"
           :onEdit="onEdit"
+          :onDelete="onDelete"
         />
       </div>
     </div>
@@ -134,6 +135,30 @@ export default {
       this.activity.priority = priority;
       this.isActivityEdit = true;
       this.isModalShow = true;
+    },
+    onDelete(id) {
+      this.$swal({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let datas = JSON.parse(localStorage.getItem("vue-tobedone"));
+          this.data.activity = this.data.activity.filter(
+            (item) => item.id !== id
+          );
+          datas.map((data) => {
+            if (data.id === this.data.id) data.activity = this.data.activity;
+          });
+          localStorage.setItem("vue-tobedone", JSON.stringify(datas));
+          this.$swal("Deleted!", "Your file has been deleted.", "success");
+          this.refreshData();
+        }
+      });
     },
   },
 };
